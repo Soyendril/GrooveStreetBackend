@@ -1,7 +1,5 @@
 package com.GrooveSpring.conversation;
 
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
@@ -38,8 +36,8 @@ public class ConversationController {
      * @return
      */
     @GetMapping("{id}")
-    public List<Conversation> getAllByUserIdGroupByUser2(@PathVariable Long id){
-        return conversationService.getAllByUserIdGroupByUser2(id);
+    public List<Conversation> getAllByMusicienIdGroupByMusicien2(@PathVariable Long id){
+        return conversationService.getAllByUserIdGroupByMusicien2(id);
     }
 
     /**
@@ -49,7 +47,7 @@ public class ConversationController {
      * @return
      */
     @GetMapping("/unique/{id}")
-    public List<Conversation> getAllByUserIdGroupByUser2(@PathVariable Long id, @RequestParam Long id2){
+    public List<Conversation> getAllByMusicienIdGroupByMusicien2(@PathVariable Long id, @RequestParam Long id2){
         return conversationService.getAllConversByid1AndId2(id, id2);
     }
 
