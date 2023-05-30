@@ -35,13 +35,13 @@ public class MusicienService {
         } else {
             existingMusicien.setNom(musicien.getNom());
             existingMusicien.setEmail(musicien.getEmail());
+            existingMusicien.setCodePostal(musicien.getCodePostal());
             existingMusicien.setAge(musicien.getAge());
             existingMusicien.setDescription(musicien.getDescription());
-            existingMusicien.setPhoto(musicien.getPhoto());
-            existingMusicien.setInstruments(musicien.getInstruments());
-            existingMusicien.setCodePostal(musicien.getCodePostal());
             existingMusicien.setPseudo(musicien.getPseudo());
+            existingMusicien.setPhoto(musicien.getPhoto());
             existingMusicien.setStyle(musicien.getStyle());
+            existingMusicien.setInstruments(musicien.getInstruments());
             return musicienRepository.save(existingMusicien);
         }
     }
