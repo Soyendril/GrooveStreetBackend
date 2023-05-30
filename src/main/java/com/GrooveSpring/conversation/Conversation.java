@@ -28,5 +28,7 @@ public class Conversation {
 
     @Column(length = 250)
     private String message;
+
     private Date date;
+
 }
