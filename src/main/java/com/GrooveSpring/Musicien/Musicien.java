@@ -1,6 +1,7 @@
 package com.GrooveSpring.Musicien;
 
 import com.GrooveSpring.Instrument.Instrument;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,6 +41,9 @@ public class Musicien {
     )
     private List<Instrument> instruments;
 
+    @OneToMany
+    @JsonBackReference
+    private List<Musicien> profilsSuivi;
     public Musicien() {
     }
 }
