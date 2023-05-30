@@ -29,6 +29,11 @@ public class InstrumentController {
         return instrumentService.save(instrument);
     }
 
+    @PutMapping("/{id}")
+    public Instrument update(@RequestBody Instrument instrument,@PathVariable Long id){
+        return instrumentService.update(instrument, id);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id){
         instrumentService.deleteById(id);

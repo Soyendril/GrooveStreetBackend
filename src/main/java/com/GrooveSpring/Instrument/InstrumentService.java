@@ -1,8 +1,8 @@
 package com.GrooveSpring.Instrument;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -29,6 +29,16 @@ public class InstrumentService {
         return instrumentRepository.save(instrument);
     }
 
+    public Instrument update(Instrument instrument, long id){
+        Instrument existingIns = instrumentRepository.findById(id).orElse(null);
+        if (existingIns == null){
+            throw new RuntimeException("Musicien not found");
+        } else {
+            existingIns.setNom(instrument.getNom());
+            existingIns.setType(instrument.getType());
+            return instrumentRepository.save(existingIns);
+        }
+    }
     public void deleteById(Long id){
         instrumentRepository.deleteById(id);
     }
