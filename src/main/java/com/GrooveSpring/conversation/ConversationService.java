@@ -1,5 +1,7 @@
 package com.GrooveSpring.conversation;
 
+import com.GrooveSpring.Musicien.Musicien;
+import com.GrooveSpring.Musicien.MusicienRepository;
 import com.GrooveSpring.conversation.dto.ConversationRequestDto;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +11,11 @@ import java.util.List;
 @Service
 public class ConversationService {
     private final ConversationRepository conversationRepository;
+    private final MusicienRepository musicienRepository;
 
-    public ConversationService(ConversationRepository conversationRepository) {
+    public ConversationService(ConversationRepository conversationRepository, MusicienRepository musicienRepository) {
         this.conversationRepository = conversationRepository;
+        this.musicienRepository = musicienRepository;
     }
 
     /**
@@ -27,8 +31,8 @@ public class ConversationService {
      * @param id
      * @return
      */
-    public List<Conversation> getAllByUserId(Long id) {
-        return conversationRepository.findByUser1Id(id);
+    public List<Conversation> getAllByMusicienId(Long id) {
+        return conversationRepository.findByMusicien1Id(id);
     }
 
     /**
@@ -36,8 +40,8 @@ public class ConversationService {
      * @param id
      * @return
      */
-    public List<Conversation> getAllByUserIdGroupByUser2(Long id) {
-        return conversationRepository.findConversationGroupByUser2(id);
+    public List<Conversation> getAllByUserIdGroupByMusicien2(Long id) {
+        return conversationRepository.findConversationGroupByMusicien2(id);
     }
 
     /**
@@ -64,30 +68,30 @@ public class ConversationService {
     }
 
     /**
-     * creer une conversation en utilisant des utilisateurs existants
+     * cree une conversation en utilisant des utilisateurs existants
      * utilise par le controlleurSocket pour creer un message
      * @param conversationRequestDto modele minimum reçu du back : message + les id
      * @return
      */
-    public Conversation createConversationWithUsers(ConversationRequestDto conversationRequestDto) {
-        Long user1_id = conversationRequestDto.getUser1_id();
-        Long user2_id = conversationRequestDto.getUser2_id();
+    public Conversation createConversationWithMusiciens(ConversationRequestDto conversationRequestDto) {
+        Long user1_id = conversationRequestDto.getMusicien1_id();
+        Long user2_id = conversationRequestDto.getMusicien1_id();
         String laDate = Instant.now() +"";
         // conversationEntity.setDate(this.laDate);
 
         // Vérifie si les utilisateurs avec les IDs spécifiés existent
-        User user1 = userRepository.findById(user1_id).orElse(null);
-        User user2 = userRepository.findById(user2_id).orElse(null);
+        Musicien musicien1 = musicienRepository.findById(user1_id).orElse(null);
+        Musicien musicien2 = musicienRepository.findById(user2_id).orElse(null);
 
         // si user1 et 2 user2 pas null
         // on cree une nouvelle conversationEntity
         // sinon renvoi une erreur
-        if(user1 != null  && user2 != null){
+        if(musicien1 != null  && musicien2 != null){
             Conversation conversation = new Conversation();
             conversation.setMessage(conversationRequestDto.getMessage());
             conversation.setDate(conversationRequestDto.getDate());
-            conversation.setUser1(user1);
-            conversation.setUser2(user2);
+            conversation.setMusicien1(musicien1);
+            conversation.setMusicien2(musicien2);
             return conversationRepository.save(conversation);
         } else {
             throw new IllegalArgumentException("L'un ou les deux utilisateurs n'existent pas.");

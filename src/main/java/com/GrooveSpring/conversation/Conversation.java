@@ -1,9 +1,12 @@
 package com.GrooveSpring.conversation;
 
+import com.GrooveSpring.Musicien.Musicien;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "CONVERSATIONS")
@@ -16,15 +19,16 @@ public class Conversation {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user1_id")
-    private User user1;
+    @JoinColumn(name = "musicien1_id")
+    private Musicien musicien1;
 
     @ManyToOne
-    @JoinColumn(name = "user2_id")
-    private User user2;
+    @JoinColumn(name = "musicien2_id")
+    private Musicien musicien2;
 
     @Column(length = 250)
     private String message;
-    private String date;
+
+    private Date date;
 
 }
