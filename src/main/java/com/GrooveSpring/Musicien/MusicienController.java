@@ -31,6 +31,11 @@ public class MusicienController {
         return musicienService.save(musicien);
     }
 
+    @PutMapping("/{id}")
+    public Musicien update(@RequestBody Musicien musicien, @PathVariable long id) {
+        return musicienService.update(musicien, id);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id){
         musicienService.deleteById(id);
