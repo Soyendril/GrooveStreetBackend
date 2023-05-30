@@ -1,5 +1,6 @@
 package com.GrooveSpring.Instrument;
 
+import com.GrooveSpring.Musicien.Musicien;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
