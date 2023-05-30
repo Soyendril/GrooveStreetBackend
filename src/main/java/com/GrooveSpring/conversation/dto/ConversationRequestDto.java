@@ -8,8 +8,8 @@ import lombok.Data;
 
 @Data
 public class ConversationRequestDto {
-    private Long user1_id;
-    private Long user2_id;
+    private Long musicien1_id;
+    private Long musicien2_id;
     private String message;
     private String date;
 }
