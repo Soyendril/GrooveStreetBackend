@@ -19,6 +19,8 @@ public class Musicien {
     @Column
     private String nom;
     @Column
+    private String password;
+    @Column
     private String email;
     @Column
     private String codePostal;

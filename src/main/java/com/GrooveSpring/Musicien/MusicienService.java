@@ -4,7 +4,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class MusicienService {
     private final MusicienRepository musicienRepository;
@@ -49,4 +52,25 @@ public class MusicienService {
         public void deleteById (Long id){
             musicienRepository.deleteById(id);
         }
+
+
+    /**
+     * Teste un utilisateur s'il existe dans la base avec le meme mot de passe
+     * @param pseudo
+     * @param password
+     * @return id + username de l'utilisateur
+     */
+    public Map<String, Object> getAuth(String pseudo, String password) {
+        Musicien musicien = musicienRepository.findByPseudoAndPassword(pseudo, password);
+        Map<String, Object> response = new HashMap<>();
+        if (musicien == null) {
+            // La requête est vide, aucun utilisateur trouvé
+            response.put("id", "not");
+            response.put("musicien", "not");
+            return response;
+        }
+        response.put("id", musicien.getId());
+        response.put("userName", musicien.getPseudo());
+        return response;
     }
+}
