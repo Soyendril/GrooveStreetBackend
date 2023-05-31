@@ -28,6 +28,9 @@ public class MediaController {
         return mediaService.save(media);
     }
 
+    @PutMapping("/{id}")
+    public Media update(@RequestBody Media media, @PathVariable Long id){ return  mediaService.update(media,id);}
+
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id){
         mediaService.deleteById(id);

@@ -28,6 +28,18 @@ public class MediaService {
         return mediaRepository.save(media);
     }
 
+    public Media update(Media media, Long id){
+        Media existingMedia = mediaRepository.findById(id).orElse(null);
+        if (existingMedia==null){
+            throw new RuntimeException("Média non existant");
+        } else {
+            existingMedia.setNom(media.getNom());
+            existingMedia.setLien(media.getLien());
+            existingMedia.setType(media.getType());
+            return mediaRepository.save(existingMedia);
+        }
+    }
+
     public void deleteById(Long id){
         mediaRepository.deleteById(id);
     }
