@@ -33,13 +33,23 @@ public class Musicien {
     @Column
     private String style;
 
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "musicien_instrument",
             joinColumns = @JoinColumn(name = "musicien_id"),
             inverseJoinColumns = @JoinColumn(name = "instrument_id")
     )
+
     private List<Instrument> instruments;
+
+    @ManyToMany
+    @JoinTable(
+            name = "musicien_instrumentRecherche",
+            joinColumns = @JoinColumn(name = "musicien_id"),
+            inverseJoinColumns = @JoinColumn(name = "instrument_id")
+    )
+    private List<Instrument> instrumentRecherche;
 
     @OneToMany
     @JsonBackReference
