@@ -20,8 +20,8 @@ public class Instrument {
     @Column
     private String type;
 
-    @ManyToMany(mappedBy = "musiciens")
-    private List<Musicien> musiciens;
+    @ManyToMany(mappedBy = "instrument")
+    private List<Musicien> musicien;
 
     public Instrument() {
     }

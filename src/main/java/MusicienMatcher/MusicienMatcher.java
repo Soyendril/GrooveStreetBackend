@@ -24,9 +24,9 @@ public class MusicienMatcher {
         if (!musicien.getStyle().equals(targetMusicien.getStyle())) {
             return false;
         }
-        List<Instrument> instrumentsRecherches = targetMusicien.getInstruments();
+        List<Instrument> instrumentsRecherches = targetMusicien.getInstrument();
         for (Instrument instrumentRecherche : instrumentsRecherches) {
-            if (!musicien.getInstruments().contains(instrumentRecherche)) {
+            if (!musicien.getInstrument().contains(instrumentRecherche)) {
                 return false;
             }
         }

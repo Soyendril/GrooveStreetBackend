@@ -44,7 +44,7 @@ public class MusicienService {
             existingMusicien.setPseudo(musicien.getPseudo());
             existingMusicien.setPhoto(musicien.getPhoto());
             existingMusicien.setStyle(musicien.getStyle());
-            existingMusicien.setInstruments(musicien.getInstruments());
+            existingMusicien.setInstrument(musicien.getInstrument());
             return musicienRepository.save(existingMusicien);
         }
     }
