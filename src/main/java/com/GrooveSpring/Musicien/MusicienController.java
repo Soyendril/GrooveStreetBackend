@@ -5,6 +5,7 @@ import com.GrooveSpring.Musicien.MusicienService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -34,5 +35,17 @@ public class MusicienController {
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id){
         musicienService.deleteById(id);
+    }
+
+    /**
+     * Utiliser @reqyestparam a la place de @pathvariable
+     * @param pseudo
+     * @param password
+     * @return
+     */
+    @GetMapping("{userName}/{password}")
+    // @GetMapping("/read")
+    public Map<String, Object> getMusicienPseudo(@PathVariable String pseudo, @PathVariable String password){
+        return musicienService.getAuth(pseudo, password);
     }
 }
