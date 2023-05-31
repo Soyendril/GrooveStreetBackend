@@ -43,7 +43,7 @@ public class Musicien {
             inverseJoinColumns = @JoinColumn(name = "instrument_id")
     )
 
-    private List<Instrument> instruments;
+    private List<Instrument> instrument;
 
     @ManyToMany
     @JoinTable(
