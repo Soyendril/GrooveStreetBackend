@@ -64,14 +64,13 @@ public class MusicienController {
     }
 
     /**
-     * Utiliser @reqyestparam a la place de @pathvariable
-     * @param pseudo
+     * @param email
      * @param password
      * @return
      */
-    @GetMapping("{userName}/{password}")
+    @GetMapping("{email}/{password}")
     // @GetMapping("/read")
-    public Map<String, Object> getMusicienPseudo(@PathVariable String pseudo, @PathVariable String password){
-        return musicienService.getAuth(pseudo, password);
+    public Map<String, Object> getMusicienPseudo(@PathVariable String email, @PathVariable String password){
+        return musicienService.getAuth(email, password);
     }
 }
