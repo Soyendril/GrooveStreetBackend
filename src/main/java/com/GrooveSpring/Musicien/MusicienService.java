@@ -56,21 +56,21 @@ public class MusicienService {
 
     /**
      * Teste un utilisateur s'il existe dans la base avec le meme mot de passe
-     * @param pseudo
+     * @param email
      * @param password
      * @return id + username de l'utilisateur
      */
-    public Map<String, Object> getAuth(String pseudo, String password) {
-        Musicien musicien = musicienRepository.findByPseudoAndPassword(pseudo, password);
+    public Map<String, Object> getAuth(String email, String password) {
+        Musicien musicien = musicienRepository.findByEmailAndPassword(email, password);
         Map<String, Object> response = new HashMap<>();
         if (musicien == null) {
             // La requête est vide, aucun utilisateur trouvé
             response.put("id", "not");
-            response.put("musicien", "not");
+            response.put("email", "not");
             return response;
         }
         response.put("id", musicien.getId());
-        response.put("userName", musicien.getPseudo());
+        response.put("email", musicien.getEmail());
         return response;
     }
 }
