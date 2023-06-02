@@ -55,7 +55,7 @@ public class MusicienService {
 
 
     /**
-     * Teste un utilisateur s'il existe dans la base avec le meme mot de passe
+     * Teste un utilisateur existe dans la base avec l'email et le meme mot de passe
      * @param email
      * @param password
      * @return id + username de l'utilisateur
