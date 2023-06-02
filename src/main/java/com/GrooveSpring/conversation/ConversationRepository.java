@@ -20,10 +20,17 @@ public interface ConversationRepository extends JpaRepository<Conversation, Long
      * @return
      */
 
-    @Query("SELECT c FROM Conversation c WHERE c.musicien1.id = :musicien1Id OR c.musicien2.id = :musicien1Id")
+    // @Query("SELECT DISTINCT c FROM Conversation c WHERE c.musicien2.id = :musicien1Id")
+    // @Query("SELECT DISTINCT c FROM Conversation c WHERE c.musicien1.id = :musicien1Id OR c.musicien2.id = :musicien1Id")
     // @Query("SELECT c FROM Conversation c WHERE c.musicien1.id = :musicien1Id OR c.musicien2.id = :musicien1Id GROUP BY c.musicien1.id, c.musicien2.id")
-    List<Conversation> findConversationGroupByMusicien2(Long musicien1Id);
+    // List<Conversation> findConversationGroupByMusicien2(Long musicien1Id);
 
+    // @Query("SELECT c.musicien1.id, c.musicien2.id FROM Conversation c WHERE c.musicien1.id = :musicien1Id OR c.musicien2.id = :musicien1Id GROUP BY c.musicien1.id, c.musicien2.id")
+    @Query("SELECT c.musicien2.id, c.musicien2.nom FROM Conversation c WHERE c.musicien1.id = :musicien1Id GROUP BY c.musicien2.id, c.musicien2.nom")
+    List<Object[]> findConversationGroupByMusicien1(Long musicien1Id);
+
+    @Query("SELECT c.musicien1.id, c.musicien1.nom FROM Conversation c WHERE c.musicien2.id = :musicien2Id GROUP BY c.musicien1.id, c.musicien1.nom")
+    List<Object[]> findConversationGroupByMusicien2(Long musicien2Id);
 
     /**
      * recherche toutes les conversations avec deux id données

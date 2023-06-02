@@ -2,10 +2,12 @@ package com.GrooveSpring.conversation;
 
 import com.GrooveSpring.Musicien.Musicien;
 import com.GrooveSpring.Musicien.MusicienRepository;
+import com.GrooveSpring.conversation.dto.ConversationParMusicienDto;
 import com.GrooveSpring.conversation.dto.ConversationRequestDto;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,12 +38,56 @@ public class ConversationService {
     }
 
     /**
-     * Liste des conversations d'un user groupés par user2
+     * Liste des conversations d'un musicien groupés par user2
+     * permet de lister toutes les conversations privées d'un musicien
+     * recupere une premiere liste de toutes les colones 2 où est présent l'id donné
+     * recupere une deuxieme liste de toutes les colones 1 où est présent l'id donné
+     * parcours la première liste et ajoute les éléments de la deuxième non identiques
+     * @param idMusicien
+     * @return ConversationParMusicienDto = conversation avec uniquement id et nom avec qui le musicien a discuté
+     */
+    public List<ConversationParMusicienDto> getAllByMusicienIdGroupByMusicien2(Long idMusicien) {
+//         return conversationRepository.findConversationGroupByMusicien2(id);
+
+        List<Object[]> conversations1 = conversationRepository.findConversationGroupByMusicien1(idMusicien);
+        List<ConversationParMusicienDto> conversationDtos1 = new ArrayList<>();
+        for (Object[] conversation : conversations1) {
+            Long id = (Long) conversation[0];
+            String nom = (String) conversation[1];
+            ConversationParMusicienDto conversationDto = new ConversationParMusicienDto();
+            conversationDto.setId(id);
+            conversationDto.setNom(nom);
+            conversationDtos1.add(conversationDto);
+        }
+
+        List<Object[]> conversations2 = conversationRepository.findConversationGroupByMusicien2(idMusicien);
+        for (Object[] conversation : conversations2) {
+            Long id = (Long) conversation[0];
+            String nom = (String) conversation[1];
+            if (!containsConversation(conversationDtos1, id, nom)) {
+                ConversationParMusicienDto conversationDto = new ConversationParMusicienDto();
+                conversationDto.setId(id);
+                conversationDto.setNom(nom);
+                conversationDtos1.add(conversationDto);
+            }
+        }
+         return conversationDtos1;
+    }
+
+    /**
+     * permet de verifier si des elements id et nom sont contenus dans une liste
+      * @param conversationDtos
      * @param id
+     * @param nom
      * @return
      */
-    public List<Conversation> getAllByUserIdGroupByMusicien2(Long id) {
-        return conversationRepository.findConversationGroupByMusicien2(id);
+    private boolean containsConversation(List<ConversationParMusicienDto> conversationDtos, Long id, String nom) {
+        for (ConversationParMusicienDto conversationDto : conversationDtos) {
+            if (conversationDto.getId().equals(id) && conversationDto.getNom().equals(nom)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
