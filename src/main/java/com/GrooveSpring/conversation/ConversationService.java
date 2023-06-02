@@ -75,7 +75,7 @@ public class ConversationService {
      */
     public Conversation createConversationWithMusiciens(ConversationRequestDto conversationRequestDto) {
         Long user1_id = conversationRequestDto.getMusicien1_id();
-        Long user2_id = conversationRequestDto.getMusicien1_id();
+        Long user2_id = conversationRequestDto.getMusicien2_id();
         String laDate = Instant.now() +"";
         // conversationEntity.setDate(this.laDate);
 

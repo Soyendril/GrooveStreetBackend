@@ -9,6 +9,7 @@ public class ConversationController {
     private final ConversationService conversationService;
 
     public ConversationController(ConversationService conversationService) {
+        System.out.println(conversationService);
         this.conversationService = conversationService;
     }
 
