@@ -11,5 +11,5 @@ public interface MusicienRepository extends JpaRepository<Musicien, Long> {
      * @param password
      * @return
      */
-    Musicien findByPseudoAndPassword(String pseudo, String password);
+    Musicien findByEmailAndPassword(String email, String password);
 }
