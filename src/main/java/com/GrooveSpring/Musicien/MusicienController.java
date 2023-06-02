@@ -69,8 +69,7 @@ public class MusicienController {
      * @return
      */
     @GetMapping("{email}/{password}")
-    // @GetMapping("/read")
-    public Map<String, Object> getMusicienPseudo(@PathVariable String email, @PathVariable String password){
+    public Map<String, Object> getMusicienEmail(@PathVariable String email, @PathVariable String password){
         return musicienService.getAuth(email, password);
     }
 }
