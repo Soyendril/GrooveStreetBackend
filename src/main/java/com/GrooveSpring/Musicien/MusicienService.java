@@ -28,6 +28,10 @@ public class MusicienService {
                         "Musicien introuvable"));
     }
 
+    public List<Long> getMusicienIds(){
+        return musicienRepository.findAllMusicienIds();
+    }
+
     public Musicien save(Musicien musicien) {
         return musicienRepository.save(musicien);
     }
