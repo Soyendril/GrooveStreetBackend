@@ -15,6 +15,6 @@ public class ConversationRequestDto {
     private Long musicien1_id;
     private Long musicien2_id;
     private String message;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 }

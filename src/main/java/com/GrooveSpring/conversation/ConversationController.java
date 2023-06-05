@@ -1,5 +1,6 @@
 package com.GrooveSpring.conversation;
 
+import com.GrooveSpring.conversation.dto.ConversationParMusicienDto;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
@@ -38,9 +39,9 @@ public class ConversationController {
      * @return
      */
     @GetMapping("{id}")
-    public List<Conversation> getAllByMusicienIdGroupByMusicien2(@PathVariable Long id){
+    public List<ConversationParMusicienDto> getAllByMusicienIdGroupByMusicien2(@PathVariable Long id){
         System.out.println("test" + id);
-        return conversationService.getAllByUserIdGroupByMusicien2(id);
+        return conversationService.getAllByMusicienIdGroupByMusicien2(id);
     }
 
     /**

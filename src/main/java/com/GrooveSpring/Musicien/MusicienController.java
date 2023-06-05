@@ -1,5 +1,10 @@
 package com.GrooveSpring.Musicien;
 
+
+import com.GrooveSpring.Musicien.Musicien;
+import com.GrooveSpring.Musicien.MusicienService;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -73,5 +78,16 @@ public class MusicienController {
     @GetMapping("{email}/{password}")
     public Map<String, Object> getMusicienEmail(@PathVariable String email, @PathVariable String password){
         return musicienService.getAuth(email, password);
+    }
+
+    /**
+     * Recupere un email et un password en post
+     * Renvoi l'id et l'email si ok, sinon erreur
+     * @param @requestBody
+     * @return
+     */
+    @PostMapping("{verifAuth}")
+    public ResponseEntity<?> getMusicienEmail(@RequestBody Musicien musicien){
+        return musicienService.returnIsAuth(musicien);
     }
 }
