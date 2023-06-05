@@ -18,14 +18,25 @@ public class MusicienService {
         this.musicienRepository = musicienRepository;
     }
 
+    /**
+     * recherche de tous les musiciens
+     * @return liste des tous les musiciens
+     */
     public List<Musicien> findAll() {
         return musicienRepository.findAll();
     }
 
+    /**
+     * recherche de musicien par id
+     * @param id du musicien à trouver
+     * @return musicien à l'id indiquée
+     */
     public Musicien findById(Long id) {
         return musicienRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Musicien introuvable"));
+        // on cherche le musicien par son id, si l'id n'existe pas on retourne le message d'erreur "Musicien introuvable"
+        //sinon on retourne le musicien se trouvant à l'id recherché
     }
 
     public List<Long> getMusicienIds(){
@@ -36,11 +47,18 @@ public class MusicienService {
         return musicienRepository.save(musicien);
     }
 
+    /**
+     * Update d'un musicien
+     * @param musicien musicien à update
+     * @param id id du musicien à update
+     * @return
+     */
     public Musicien update(Musicien musicien, long id) {
         Musicien existingMusicien = musicienRepository.findById(id).orElse(null);
 
         if (existingMusicien == null) {
             throw new RuntimeException("Musicien not found");
+            //si le musicien n'existe pas on retourne le message "Musicien not found"
         } else {
             existingMusicien.setNom(musicien.getNom());
             existingMusicien.setEmail(musicien.getEmail());
@@ -52,9 +70,14 @@ public class MusicienService {
             existingMusicien.setStyle(musicien.getStyle());
             existingMusicien.setInstrument(musicien.getInstrument());
             return musicienRepository.save(existingMusicien);
+            //sinon on applique les mise à jour faites au media
         }
     }
 
+    /**
+     * deleteById() méthode qui permet la supression d'un musicien à l'id indiquée
+     * @param id du musicien à supprimer
+     */
         public void deleteById (Long id){
             musicienRepository.deleteById(id);
         }
