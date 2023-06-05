@@ -1,6 +1,8 @@
 package com.GrooveSpring.Musicien;
 
+import com.GrooveSpring.outils.AuthResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -73,4 +75,16 @@ public class MusicienService {
         response.put("email", musicien.getEmail());
         return response;
     }
+
+    public ResponseEntity<?> returnIsAuth(Musicien musicien) {
+        if (musicienRepository.findByEmailAndPassword(musicien.getEmail(), musicien.getPassword()) == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("mauvais email ou password");
+        }
+
+        // Votre logique de traitement si la requête est valide
+        Long musicienId = musicienRepository.findMusicienIdByEmailAndPassword(musicien.getEmail(), musicien.getPassword());
+        AuthResponse successResponse = new AuthResponse("Requête traitée avec succès", musicienId);
+        return ResponseEntity.ok(successResponse);
+    }
+
 }
