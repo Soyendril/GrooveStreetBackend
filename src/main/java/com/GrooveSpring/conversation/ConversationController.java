@@ -4,10 +4,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @CrossOrigin
+@RequestMapping(value = "conversations")
 public class ConversationController {
     private final ConversationService conversationService;
 
     public ConversationController(ConversationService conversationService) {
+        System.out.println(conversationService);
         this.conversationService = conversationService;
     }
 
@@ -37,6 +39,7 @@ public class ConversationController {
      */
     @GetMapping("{id}")
     public List<Conversation> getAllByMusicienIdGroupByMusicien2(@PathVariable Long id){
+        System.out.println("test" + id);
         return conversationService.getAllByUserIdGroupByMusicien2(id);
     }
 

@@ -43,24 +43,21 @@ public class ConversationWebSocketController {
      */
     @MessageMapping("/private-message")
     public Conversation receivePrivateMessage(ConversationRequestDto conversationRequestDto) {
-        // Traitez le message reçu et renvoyez une réponse
-        System.out.println("Creation par receivePrivateMessage, id : ");
-        // Envoyer la réponse au topic dynamique
         Long id = conversationRequestDto.getMusicien1_id();
-        Long idUser = conversationRequestDto.getMusicien2_id();
+        Long idMusicien = conversationRequestDto.getMusicien2_id();
         messagingTemplate.convertAndSend("/topic/private/" + id, conversationRequestDto);
-        messagingTemplate.convertAndSend("/topic/private/" + idUser, conversationRequestDto);
+        messagingTemplate.convertAndSend("/topic/private/" + idMusicien, conversationRequestDto);
         return conversationService.createConversationWithMusiciens(conversationRequestDto);
     }
 
     /**
      * url qui recupere le message instantané suivant que l'utilisateur vient de poster
-     * @param id
+     * @param idMusicien
      * @return
      */
-    @SendTo("/topic/private/{idUser}")
-    public String getPrivateTopicUser(@DestinationVariable String idUser) {
-        return idUser;
+    @SendTo("/topic/private/{idMusicien}")
+    public String getPrivateTopicUser(@DestinationVariable String idMusicien) {
+        return idMusicien;
     }
 
     /**

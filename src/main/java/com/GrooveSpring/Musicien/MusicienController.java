@@ -1,7 +1,5 @@
 package com.GrooveSpring.Musicien;
 
-import com.GrooveSpring.Musicien.Musicien;
-import com.GrooveSpring.Musicien.MusicienService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +35,10 @@ public class MusicienController {
         return musicienService.findById(id);
     }
 
+    @GetMapping("/ids")
+    public List<Long> getMusicienIds() {
+       return musicienService.getMusicienIds();
+    }
     @PostMapping("")
     public Musicien save(@RequestBody Musicien musicien){
         return musicienService.save(musicien);
@@ -69,8 +71,7 @@ public class MusicienController {
      * @return
      */
     @GetMapping("{email}/{password}")
-    // @GetMapping("/read")
-    public Map<String, Object> getMusicienPseudo(@PathVariable String email, @PathVariable String password){
+    public Map<String, Object> getMusicienEmail(@PathVariable String email, @PathVariable String password){
         return musicienService.getAuth(email, password);
     }
 }
