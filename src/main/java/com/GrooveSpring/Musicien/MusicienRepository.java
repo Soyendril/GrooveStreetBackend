@@ -16,6 +16,13 @@ public interface MusicienRepository extends JpaRepository<Musicien, Long> {
      */
     Musicien findByEmailAndPassword(String email, String password);
 
+    /**
+     * Permet de retourner l'id de l'utilisateur demandé
+     * @param email
+     * @param password
+     * @return id
+     */
+
     @Query("SELECT m.id FROM Musicien m WHERE m.email = :email AND m.password = :password")
     Long findMusicienIdByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
