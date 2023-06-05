@@ -59,7 +59,7 @@ public class ConversationService {
 
     /**
      * creation d'une conversation
-     * !!!!!!!!!!!!!!!! pas utilisé car ne prends pas en compte l'existance des users !!!!!!!!!!!!!!!!
+     * !!!!!!!!!!!!!!!! pas utilisé car ne prends pas en compte l'existence des users !!!!!!!!!!!!!!!!
      * @param conversation
      * @return
      */
@@ -85,7 +85,7 @@ public class ConversationService {
 
         // si user1 et 2 user2 pas null
         // on cree une nouvelle conversationEntity
-        // sinon renvoi une erreur
+        // sinon renvoi l'erreur "L'un ou les deux utilisateurs n'existent pas."
         if(musicien1 != null  && musicien2 != null){
             Conversation conversation = new Conversation();
             conversation.setMessage(conversationRequestDto.getMessage());
@@ -102,7 +102,7 @@ public class ConversationService {
      * met à jour un message dans le modele
      * @param id
      * @param conversation
-     * @return
+     * @return conversation à l'id indiquée
      */
     public Conversation updateConversation(Long id, Conversation conversation) {
         return conversationRepository.findById(id)
@@ -110,12 +110,14 @@ public class ConversationService {
                     message.setMessage(conversation.getMessage());
                     message.setDate(conversation.getDate());
                     return conversationRepository.save(conversation);
-                }).orElseThrow(()-> new RuntimeException("Conversation non trouvée !"));
+                }).orElseThrow(()-> new RuntimeException("Conversation introuvable !"));
+        // on cherche la conversation par son id, si l'id n'existe pas on retourne le message d'erreur "Conversation introuvable"
+        //sinon on retourne la conversation se trouvant à l'id recherché
     }
 
     /**
      * Supprime une conversation
-     * @param id
+     * @param id de la conversation à supprimer
      * @return
      */
     public void deleteConversation(Long id) {

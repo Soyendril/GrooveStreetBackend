@@ -16,8 +16,8 @@ public class MusicienController {
     }
 
     /**
-     * findAll() méthode qui retourne tous la liste de musicien
-     * @return
+     * findAll() méthode qui retourne la liste de tous les musicien
+     * @return liste de tous les musiciens
      */
 
     @GetMapping("")
@@ -28,7 +28,7 @@ public class MusicienController {
     /**
      * findById() méthode qui retourne un musicien en fonction de son id
      * @param id id du musicien à trouver
-     * @return
+     * @return musicien à l'id indiquée
      */
     @GetMapping("/{id}")
     public Musicien findById(@PathVariable Long id){
@@ -66,9 +66,10 @@ public class MusicienController {
     }
 
     /**
+     * getMusicienEmail() méthode qui recupère l'email d'un musicien
      * @param email
      * @param password
-     * @return
+     * @return musicien
      */
     @GetMapping("{email}/{password}")
     public Map<String, Object> getMusicienEmail(@PathVariable String email, @PathVariable String password){
