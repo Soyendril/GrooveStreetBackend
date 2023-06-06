@@ -1,6 +1,8 @@
 package com.GrooveSpring.Musicien;
 
+import com.GrooveSpring.Instrument.Instrument;
 import com.GrooveSpring.outils.AuthResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,8 +16,11 @@ import java.util.Map;
 public class MusicienService {
     private final MusicienRepository musicienRepository;
 
-    public MusicienService(MusicienRepository musicienRepository) {
+    private final ObjectMapper objectMapper;
+
+    public MusicienService(MusicienRepository musicienRepository,ObjectMapper objectMapper) {
         this.musicienRepository = musicienRepository;
+        this.objectMapper = objectMapper;
     }
 
     /**
@@ -43,6 +48,19 @@ public class MusicienService {
         return musicienRepository.findAllMusicienIds();
     }
 
+    /**
+     * findMusiciensByCodePostal()
+     * méthode qui permet de trouver la liste des musiciens se trouvant dans le codePostal indiqué
+     * @param codePostal
+     * @return
+     */
+    public List<Musicien> findMusiciensByCodePostal(String codePostal){
+        return  musicienRepository.findMusiciensByCodePostal(codePostal);
+    }
+
+    public List<Musicien> findMusiciensByCodePostalAndInstrument(String codePostal, Instrument instrument){
+        return  musicienRepository.findMusiciensByCodePostalAndInstrument(codePostal,instrument);
+    }
     public Musicien save(Musicien musicien) {
         return musicienRepository.save(musicien);
     }
