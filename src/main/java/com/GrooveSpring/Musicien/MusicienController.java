@@ -1,6 +1,7 @@
 package com.GrooveSpring.Musicien;
 
 
+import com.GrooveSpring.Instrument.Instrument;
 import com.GrooveSpring.Musicien.Musicien;
 import com.GrooveSpring.Musicien.MusicienService;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,16 @@ public class MusicienController {
         return musicienService.findById(id);
     }
 
+    @GetMapping("/{codePostal}")
+    public List<Musicien>findMusiciensByCodePostal(@PathVariable String codePostal){
+        return  musicienService.findMusiciensByCodePostal(codePostal);
+    }
+
+
+    @GetMapping("/{codePostal}/{instrument}")
+    public List<Musicien>findMusiciensByCodePostalAndInstrument(@PathVariable String codePostal, @PathVariable Instrument instrument){
+        return  musicienService.findMusiciensByCodePostalAndInstrument(codePostal,instrument);
+    }
     @GetMapping("/ids")
     public List<Long> getMusicienIds() {
        return musicienService.getMusicienIds();
