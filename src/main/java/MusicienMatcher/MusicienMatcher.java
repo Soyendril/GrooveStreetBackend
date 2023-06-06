@@ -8,11 +8,11 @@ import java.util.List;
 
 @Component
 public class MusicienMatcher {
-    public List<Musicien> matchMusiciensStyle(Musicien musicien1, List<Musicien> allMusiciens) {
+    public List<Musicien> matchMusiciens(Musicien musicien1, List<Musicien> allMusiciens) {
         List<Musicien> matchedMusiciens = new ArrayList<>();
 
         for (Musicien musicien2 : allMusiciens) {
-            if (isMatchingStyle(musicien2, musicien1)) {
+            if (isMatchingStyle(musicien2, musicien1) && isMatchingDepartement(musicien2, musicien1)) {
                 matchedMusiciens.add(musicien2);
             }
         }
@@ -31,6 +31,12 @@ public class MusicienMatcher {
             }
         }
         return true;
+    }
+
+    private boolean isMatchingDepartement(Musicien musicien, Musicien targetMusicien){
+        String codePostal1 = musicien.getCodePostal();
+        String codePostal2 = targetMusicien.getCodePostal();
+        return codePostal1.substring(0, 2).equals(codePostal2.substring(0, 2));
     }
 }
 
