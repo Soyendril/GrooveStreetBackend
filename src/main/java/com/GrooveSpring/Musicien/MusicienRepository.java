@@ -27,6 +27,15 @@ public interface MusicienRepository extends JpaRepository<Musicien, Long> {
     @Query("SELECT m.id FROM Musicien m")
     List<Long> findAllMusicienIds();
 
+
+    /**
+     * recupere uniquement le pseudo
+     * @param id
+     * @return
+     */
+    @Query("SELECT m.pseudo FROM Musicien m WHERE m.id = :id")
+    String findPseudoById(Long id);
+
     @Query("SELECT m.codePostal FROM Musicien m WHERE m.codePostal = :codePostal")
     List<Musicien> findMusiciensByCodePostal(@Param("codePostal") String codePostal);
 
@@ -36,6 +45,7 @@ public interface MusicienRepository extends JpaRepository<Musicien, Long> {
 
     @Query("SELECT m.codePostal FROM Musicien m WHERE m.instrument = :instrument")
     List<Musicien> findMusiciensByInstrument(@Param("instrument") Instrument instrument);
+
 
 
 }
