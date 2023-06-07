@@ -41,12 +41,15 @@ public class MusicienController {
         return musicienService.findById(id);
     }
 
-    @GetMapping("/{codePostal}")
+    @GetMapping("/codePostal/{codePostal}")
     public List<Musicien>findMusiciensByCodePostal(@PathVariable String codePostal){
         return  musicienService.findMusiciensByCodePostal(codePostal);
     }
 
-
+    @GetMapping("/{instrument}")
+    public List<Musicien>findMusiciensByInstrument(@PathVariable Instrument instrument){
+        return  musicienService.findMusiciensByInstrument(instrument);
+    }
     @GetMapping("/{codePostal}/{instrument}")
     public List<Musicien>findMusiciensByCodePostalAndInstrument(@PathVariable String codePostal, @PathVariable Instrument instrument){
         return  musicienService.findMusiciensByCodePostalAndInstrument(codePostal,instrument);
