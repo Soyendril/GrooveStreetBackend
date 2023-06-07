@@ -36,7 +36,7 @@ public class MusicienController {
      * @param id id du musicien à trouver
      * @return musicien à l'id indiquée
      */
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Musicien findById(@PathVariable Long id){
         return musicienService.findById(id);
     }
@@ -46,7 +46,7 @@ public class MusicienController {
         return  musicienService.findMusiciensByCodePostal(codePostal);
     }
 
-    @GetMapping("/{instrument}")
+    @GetMapping("/instrument/{instrument}")
     public List<Musicien>findMusiciensByInstrument(@PathVariable Instrument instrument){
         return  musicienService.findMusiciensByInstrument(instrument);
     }
