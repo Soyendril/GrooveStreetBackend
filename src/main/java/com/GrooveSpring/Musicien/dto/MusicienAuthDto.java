@@ -7,4 +7,5 @@ public class MusicienAuthDto {
     private Long id;
     private String email;
     private String password;
+    private String pseudo;
 }

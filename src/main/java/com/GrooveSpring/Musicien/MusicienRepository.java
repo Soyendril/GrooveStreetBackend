@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface MusicienRepository extends JpaRepository<Musicien, Long> {
     /**
@@ -16,15 +18,21 @@ public interface MusicienRepository extends JpaRepository<Musicien, Long> {
      */
     Musicien findByEmailAndPassword(String email, String password);
 
-    /**
-     * Permet de retourner l'id de l'utilisateur demandé
-     * @param email
-     * @param password
-     * @return id
-     */
 
     @Query("SELECT m.id FROM Musicien m WHERE m.email = :email AND m.password = :password")
     Long findMusicienIdByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+
+
+    @Query("SELECT m.id FROM Musicien m")
+    List<Long> findAllMusicienIds();
+
+    /**
+     * recupere uniquement le pseudo
+     * @param id
+     * @return
+     */
+    @Query("SELECT m.pseudo FROM Musicien m WHERE m.id = :id")
+    String findPseudoById(Long id);
 
 
 }

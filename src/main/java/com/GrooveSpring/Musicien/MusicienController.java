@@ -84,4 +84,5 @@ public class MusicienController {
     public ResponseEntity<?> getMusicienEmail(@RequestBody Musicien musicien){
         return musicienService.returnIsAuth(musicien);
     }
+
 }
