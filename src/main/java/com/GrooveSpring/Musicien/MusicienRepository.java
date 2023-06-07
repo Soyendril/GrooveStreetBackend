@@ -1,5 +1,6 @@
 package com.GrooveSpring.Musicien;
 
+import com.GrooveSpring.Instrument.Instrument;
 import com.GrooveSpring.Musicien.dto.MusicienAuthDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,6 +27,7 @@ public interface MusicienRepository extends JpaRepository<Musicien, Long> {
     @Query("SELECT m.id FROM Musicien m")
     List<Long> findAllMusicienIds();
 
+
     /**
      * recupere uniquement le pseudo
      * @param id
@@ -33,6 +35,17 @@ public interface MusicienRepository extends JpaRepository<Musicien, Long> {
      */
     @Query("SELECT m.pseudo FROM Musicien m WHERE m.id = :id")
     String findPseudoById(Long id);
+
+    @Query("SELECT m.codePostal FROM Musicien m WHERE m.codePostal = :codePostal")
+    List<Musicien> findMusiciensByCodePostal(@Param("codePostal") String codePostal);
+
+
+    @Query("SELECT m.codePostal FROM Musicien m WHERE m.codePostal = :codePostal AND m.instrument = :instrument")
+    List<Musicien> findMusiciensByCodePostalAndInstrument(@Param("codePostal") String codePostal, @Param("instrument") Instrument instrument);
+
+    @Query("SELECT m.codePostal FROM Musicien m WHERE m.instrument = :instrument")
+    List<Musicien> findMusiciensByInstrument(@Param("instrument") Instrument instrument);
+
 
 
 }

@@ -1,8 +1,11 @@
 package com.GrooveSpring.Musicien;
 
+
+import com.GrooveSpring.Instrument.Instrument;
 import com.GrooveSpring.Musicien.Musicien;
 import com.GrooveSpring.Musicien.MusicienService;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +22,8 @@ public class MusicienController {
     }
 
     /**
-     * findAll() méthode qui retourne tous la liste de musicien
-     * @return
+     * findAll() méthode qui retourne la liste de tous les musicien
+     * @return liste de tous les musiciens
      */
 
     @GetMapping("")
@@ -31,13 +34,30 @@ public class MusicienController {
     /**
      * findById() méthode qui retourne un musicien en fonction de son id
      * @param id id du musicien à trouver
-     * @return
+     * @return musicien à l'id indiquée
      */
     @GetMapping("/{id}")
     public Musicien findById(@PathVariable Long id){
         return musicienService.findById(id);
     }
 
+    @GetMapping("/codePostal/{codePostal}")
+    public List<Musicien>findMusiciensByCodePostal(@PathVariable String codePostal){
+        return  musicienService.findMusiciensByCodePostal(codePostal);
+    }
+
+    @GetMapping("/instrument/{instrument}")
+    public List<Musicien>findMusiciensByInstrument(@PathVariable Instrument instrument){
+        return  musicienService.findMusiciensByInstrument(instrument);
+    }
+    @GetMapping("/{codePostal}/{instrument}")
+    public List<Musicien>findMusiciensByCodePostalAndInstrument(@PathVariable String codePostal, @PathVariable Instrument instrument){
+        return  musicienService.findMusiciensByCodePostalAndInstrument(codePostal,instrument);
+    }
+    @GetMapping("/ids")
+    public List<Long> getMusicienIds() {
+       return musicienService.getMusicienIds();
+    }
     @PostMapping("")
     public Musicien save(@RequestBody Musicien musicien){
         return musicienService.save(musicien);
@@ -65,9 +85,10 @@ public class MusicienController {
     }
 
     /**
+     * getMusicienEmail() méthode qui recupère l'email d'un musicien
      * @param email
      * @param password
-     * @return
+     * @return musicien
      */
     @GetMapping("{email}/{password}")
     public Map<String, Object> getMusicienEmail(@PathVariable String email, @PathVariable String password){
