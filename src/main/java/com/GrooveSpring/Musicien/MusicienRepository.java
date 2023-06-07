@@ -33,4 +33,9 @@ public interface MusicienRepository extends JpaRepository<Musicien, Long> {
 
     @Query("SELECT m.codePostal FROM Musicien m WHERE m.codePostal = :codePostal AND m.instrument = :instrument")
     List<Musicien> findMusiciensByCodePostalAndInstrument(@Param("codePostal") String codePostal, @Param("instrument") Instrument instrument);
+
+    @Query("SELECT m.codePostal FROM Musicien m WHERE m.instrument = :instrument")
+    List<Musicien> findMusiciensByInstrument(@Param("instrument") Instrument instrument);
+
+
 }
