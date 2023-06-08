@@ -4,6 +4,8 @@ package com.GrooveSpring.Musicien;
 import com.GrooveSpring.Instrument.Instrument;
 import com.GrooveSpring.Musicien.Musicien;
 import com.GrooveSpring.Musicien.MusicienService;
+import com.GrooveSpring.Musicien.dto.MusicienAuthDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +18,11 @@ import java.util.Map;
 @RequestMapping(value = "/musiciens")
 public class MusicienController {
     private final MusicienService musicienService;
+    private final ObjectMapper mapper;
 
-    public MusicienController(MusicienService musicienService) {
+    public MusicienController(MusicienService musicienService, ObjectMapper mapper) {
         this.musicienService = musicienService;
+        this.mapper = mapper;
     }
 
     /**
@@ -102,8 +106,14 @@ public class MusicienController {
      * @return
      */
     @PostMapping("{verifAuth}")
-    public ResponseEntity<?> getMusicienEmail(@RequestBody Musicien musicien){
-        return musicienService.returnIsAuth(musicien);
+    public MusicienAuthDto getMusicienEmail(@RequestBody Musicien musicien){
+        Musicien entity = musicienService.returnIsAuth(musicien);
+        return mapper.convertValue(entity, MusicienAuthDto.class);
     }
 
+    @GetMapping("/auth/{id}")
+    public MusicienAuthDto findByIdInfos(@PathVariable Long id){
+        Musicien entity = musicienService.findByIdInfos(id);
+        return mapper.convertValue(entity, MusicienAuthDto.class);
+    }
 }
