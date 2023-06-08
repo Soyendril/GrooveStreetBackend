@@ -1,5 +1,6 @@
 package MusicienMatcher;
 
+import com.GrooveSpring.CodePostal.CodePostal;
 import com.GrooveSpring.Instrument.Instrument;
 import com.GrooveSpring.Musicien.Musicien;
 import org.springframework.stereotype.Component;
@@ -66,11 +67,18 @@ public class MusicienMatcher {
      * @return booléen qui rend le résultat de la vérification du département
      */
     private boolean isMatchingDepartement(Musicien musicien, Musicien targetMusicien){
-        String codePostalMusicien = musicien.getCodePostal();
-        String codePostalTargetMusicien = targetMusicien.getCodePostal();
-        return codePostalMusicien.substring(0, 2).equals(codePostalTargetMusicien.substring(0, 2));
-        // vérification des 2 premiers caractères du code postal afin de savoir si les deux musiciens se situent dans le même departement
+        CodePostal codePostalMusicien = musicien.getCodePostal();
+        CodePostal codePostalTargetMusicien = targetMusicien.getCodePostal();
+
+        if (codePostalMusicien != null && codePostalTargetMusicien != null) {
+            String departementMusicien = codePostalMusicien.getDepartement().substring(0, 2);
+            String departementTargetMusicien = codePostalTargetMusicien.getDepartement().substring(0, 2);
+            return departementMusicien.equals(departementTargetMusicien);
+        } else {
+            return false;
+        }   // vérification des 2 premiers caractères du code postal afin de savoir si les deux musiciens se situent dans le même departement
     }
+
 }
 
 
