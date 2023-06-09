@@ -48,7 +48,7 @@ public class CodePostal {
     @Column(name = "record_timestamp")
     private String record_timestamp;
 
-    @OneToMany(mappedBy = "codePostal", cascade = CascadeType.ALL)
+    @OneToMany
     private List<Musicien> musiciens;
 
     public String getDepartement() {
