@@ -1,5 +1,4 @@
 package com.GrooveSpring.outils;
-
 public class ApiResponse {
     private String message;
 
@@ -14,4 +13,5 @@ public class ApiResponse {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

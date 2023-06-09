@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class MusicienAuthDto {
     private Long id;
-    private String email;
+    private String nom;
     private String password;
+    private String email;
     private String pseudo;
 }

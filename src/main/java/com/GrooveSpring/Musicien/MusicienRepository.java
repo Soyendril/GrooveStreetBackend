@@ -20,8 +20,9 @@ public interface MusicienRepository extends JpaRepository<Musicien, Long> {
     Musicien findByEmailAndPassword(String email, String password);
 
 
-    @Query("SELECT m.id FROM Musicien m WHERE m.email = :email AND m.password = :password")
-    Long findMusicienIdByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+//    @Query("SELECT m.id, m.nom, m.pseudo, m.email FROM Musicien m WHERE m.email = :email AND m.password = :password")
+    @Query("SELECT m FROM Musicien m WHERE m.email = :email AND m.password = :password")
+    Musicien findMusicienIdByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
 
     @Query("SELECT m.id FROM Musicien m")

@@ -1,10 +1,9 @@
 package com.GrooveSpring.Musicien;
 
 import com.GrooveSpring.Instrument.Instrument;
-import com.GrooveSpring.outils.AuthResponse;
+import com.GrooveSpring.Musicien.dto.MusicienAuthDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -125,16 +124,27 @@ public class MusicienService {
         return response;
     }
 
-    public ResponseEntity<?> returnIsAuth(Musicien musicien) {
+    /**
+     * utilisé pour l'authentification
+     * recherche un match email/password
+     * renvoi une réponse s'il trouve ou non + l'id du musicien si trouvé
+     * @param musicien
+     * @return
+     */
+    public Musicien returnIsAuth(Musicien musicien) {
         if (musicienRepository.findByEmailAndPassword(musicien.getEmail(), musicien.getPassword()) == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("mauvais email ou password");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "profil non trouvé");
         }
+        musicien = musicienRepository.findMusicienIdByEmailAndPassword(musicien.getEmail(), musicien.getPassword());
+        musicien.setPassword("*****");
 
-        // Votre logique de traitement si la requête est valide
-        Long musicienId = musicienRepository.findMusicienIdByEmailAndPassword(musicien.getEmail(), musicien.getPassword());
-        AuthResponse successResponse = new AuthResponse("Requête traitée avec succès", musicienId);
-        return ResponseEntity.ok(successResponse);
+        return musicien;
     }
 
+    public Musicien findByIdInfos(Long id) {
+        return musicienRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Porfil non trouvé")
+        );
+    }
 
 }
