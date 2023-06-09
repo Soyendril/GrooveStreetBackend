@@ -1,5 +1,6 @@
 package com.GrooveSpring.Musicien;
 
+import com.GrooveSpring.CodePostal.CodePostal;
 import com.GrooveSpring.Instrument.Instrument;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -22,8 +23,6 @@ public class Musicien {
     private String password;
     @Column
     private String email;
-    @Column
-    private String codePostal;
     @Column
     private int age;
     @Column
@@ -56,6 +55,10 @@ public class Musicien {
     @OneToMany
     @JsonBackReference
     private List<Musicien> profilsSuivi;
+
+    @ManyToOne
+    @JoinColumn(name = "code_postal_id")
+    private CodePostal codePostal;
     public Musicien() {
     }
 }
