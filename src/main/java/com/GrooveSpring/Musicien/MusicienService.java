@@ -143,7 +143,7 @@ public class MusicienService {
 
     public Musicien findByIdInfos(Long id) {
         return musicienRepository.findById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Film not found")
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Porfil non trouvé")
         );
     }
 
