@@ -54,9 +54,11 @@ public class ConversationService {
         for (Object[] conversation : conversations1) {
             Long id = (Long) conversation[0];
             String nom = (String) conversation[1];
+            String photo = (String) conversation[2];
             ConversationParMusicienDto conversationDto = new ConversationParMusicienDto();
             conversationDto.setId(id);
             conversationDto.setNom(nom);
+            conversationDto.setPhoto(photo);
             conversationDtos1.add(conversationDto);
         }
 
@@ -64,10 +66,12 @@ public class ConversationService {
         for (Object[] conversation : conversations2) {
             Long id = (Long) conversation[0];
             String nom = (String) conversation[1];
+            String photo = (String) conversation[2];
             if (!containsConversation(conversationDtos1, id, nom)) {
                 ConversationParMusicienDto conversationDto = new ConversationParMusicienDto();
                 conversationDto.setId(id);
                 conversationDto.setNom(nom);
+                conversationDto.setNom(photo);
                 conversationDtos1.add(conversationDto);
             }
         }
