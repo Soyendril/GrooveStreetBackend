@@ -9,4 +9,5 @@ import java.util.Date;
 public class ConversationParMusicienDto {
     private Long id;
     private String nom;
+    private String photo;
 }

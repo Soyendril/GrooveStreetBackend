@@ -40,7 +40,6 @@ public class ConversationController {
      */
     @GetMapping("{id}")
     public List<ConversationParMusicienDto> getAllByMusicienIdGroupByMusicien2(@PathVariable Long id){
-        System.out.println("test" + id);
         return conversationService.getAllByMusicienIdGroupByMusicien2(id);
     }
 
