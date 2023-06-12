@@ -1,5 +1,7 @@
 package com.GrooveSpring.conversation;
 
+import com.GrooveSpring.Musicien.Musicien;
+import com.GrooveSpring.Musicien.dto.MusicienAuthDto;
 import com.GrooveSpring.conversation.dto.ConversationParMusicienDto;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
