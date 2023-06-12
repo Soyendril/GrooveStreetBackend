@@ -2,8 +2,11 @@ package com.GrooveSpring.conversation;
 
 import com.GrooveSpring.Musicien.Musicien;
 import com.GrooveSpring.Musicien.MusicienRepository;
+import com.GrooveSpring.conversation.dto.ConversationDetailDto;
 import com.GrooveSpring.conversation.dto.ConversationParMusicienDto;
 import com.GrooveSpring.conversation.dto.ConversationRequestDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -15,9 +18,12 @@ public class ConversationService {
     private final ConversationRepository conversationRepository;
     private final MusicienRepository musicienRepository;
 
-    public ConversationService(ConversationRepository conversationRepository, MusicienRepository musicienRepository) {
+    private final ObjectMapper mapper;
+
+    public ConversationService(ConversationRepository conversationRepository, MusicienRepository musicienRepository, ObjectMapper mapper) {
         this.conversationRepository = conversationRepository;
         this.musicienRepository = musicienRepository;
+        this.mapper = mapper;
     }
 
     /**
@@ -156,10 +162,26 @@ public class ConversationService {
      * @param id2 user2_id
      * @return liste des conversations par utilisateur avec un autre utilisateur
      */
-    public List<Conversation> getAllConversByid1AndId2(Long id1, Long id2) {
+    public List<ConversationDetailDto> getAllConversByid1AndId2(Long id1, Long id2) {
         // cree deux listes pour les ajouter ensemble
-        return conversationRepository.findByUser1IdAndUser2Id(id1, id2);
+        List<Object[]> conversationData = conversationRepository.findByUser1IdAndUser2Id(id1, id2);
+        List<ConversationDetailDto> dtos = new ArrayList<>();
+
+        for (Object[] conversation : conversationData) {
+            ConversationDetailDto dto = new ConversationDetailDto();
+            dto.setMusicien1_id((Long) conversation[0]);
+            dto.setMusicien2_id((Long) conversation[1]);
+            dto.setMessage((String) conversation[2]);
+            dto.setDate((Date) conversation[3]);
+            dto.setPhoto((String) conversation[4]);
+            dtos.add(dto);
+        }
+        return dtos;
+
     }
+//        List <Conversation> conversations = conversationRepository.findByUser1IdAndUser2Id(id1, id2);
+//        return conversations.stream().map(convert -> mapper.convertValue(convert, ConversationDetailDto.class)).toList();
+    // return conversationRepository.findByUser1IdAndUser2Id(id1, id2);
 
     /**
      * creation d'une conversation

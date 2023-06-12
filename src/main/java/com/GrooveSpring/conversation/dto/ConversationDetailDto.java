@@ -4,14 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
-
-/**
- * permet de recuperer le format d'envoi du back
- * pour creer une conversation avec le bon id utilisateur et receveur
- */
-
 @Data
-public class ConversationRequestDto {
+public class ConversationDetailDto {
     private Long musicien1_id;
     private Long musicien2_id;
     private String message;
@@ -19,3 +13,4 @@ public class ConversationRequestDto {
     private Date date;
     private String photo;
 }
+

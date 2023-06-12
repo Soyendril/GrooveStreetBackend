@@ -1,9 +1,13 @@
 package com.GrooveSpring.conversation;
 
+import com.GrooveSpring.conversation.dto.ConversationDetailDto;
+import com.GrooveSpring.conversation.dto.ConversationRequestDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ConversationRepository extends JpaRepository<Conversation, Long> {
@@ -58,8 +62,9 @@ public interface ConversationRepository extends JpaRepository<Conversation, Long
      * @param musicien2Id
      * @return
      */
-    @Query("SELECT c FROM Conversation c WHERE (c.musicien1.id = :musicien1Id OR c.musicien2.id = :musicien1Id) AND (c.musicien1.id = :musicien2Id OR c.musicien2.id = :musicien2Id) ORDER BY c.date")
-    List<Conversation> findByUser1IdAndUser2Id(Long musicien1Id, Long musicien2Id);
+    @Query("SELECT c.musicien1.id, c.musicien2.id, c.message, c.date, c.musicien1.photo FROM Conversation c WHERE (c.musicien1.id = :musicien1Id OR c.musicien2.id = :musicien1Id) AND (c.musicien1.id = :musicien2Id OR c.musicien2.id = :musicien2Id) ORDER BY c.date")
+    List<Object[]> findByUser1IdAndUser2Id(Long musicien1Id, Long musicien2Id);
+
 
     /**
      *
