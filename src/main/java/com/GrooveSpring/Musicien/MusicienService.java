@@ -57,6 +57,9 @@ public class MusicienService {
         return  musicienRepository.findMusiciensByCodePostal(codePostal);
     }
 
+    public Musicien findMusicienByPseudo(String pseudo){
+        return  musicienRepository.findMusiciensByPseudo(pseudo);
+    }
     public List<Musicien> findMusiciensByCodePostalAndInstrument(String codePostal, Instrument instrument){
         return  musicienRepository.findMusiciensByCodePostalAndInstrument(codePostal,instrument);
     }

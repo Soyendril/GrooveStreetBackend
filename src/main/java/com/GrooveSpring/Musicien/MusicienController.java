@@ -50,6 +50,11 @@ public class MusicienController {
         return  musicienService.findMusiciensByCodePostal(codePostal);
     }
 
+    @GetMapping("/pseudo/{pseudo}")
+    public Musicien findMusicienByPseudo(@PathVariable String pseudo){
+        return  musicienService.findMusicienByPseudo(pseudo);
+    }
+
     @GetMapping("/instrument/{instrument}")
     public List<Musicien>findMusiciensByInstrument(@PathVariable Instrument instrument){
         return  musicienService.findMusiciensByInstrument(instrument);
