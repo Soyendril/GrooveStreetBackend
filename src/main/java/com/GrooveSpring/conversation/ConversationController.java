@@ -1,17 +1,25 @@
 package com.GrooveSpring.conversation;
 
+import com.GrooveSpring.Musicien.Musicien;
+import com.GrooveSpring.Musicien.dto.MusicienAuthDto;
+import com.GrooveSpring.conversation.dto.ConversationDetailDto;
 import com.GrooveSpring.conversation.dto.ConversationParMusicienDto;
+import com.GrooveSpring.conversation.dto.ConversationRequestDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @CrossOrigin
 @RequestMapping(value = "conversations")
 public class ConversationController {
     private final ConversationService conversationService;
+    private final ObjectMapper mapper;
 
-    public ConversationController(ConversationService conversationService) {
-        System.out.println(conversationService);
+    public ConversationController(ConversationService conversationService, ObjectMapper mapper) {
         this.conversationService = conversationService;
+        this.mapper = mapper;
     }
 
     /**
@@ -50,9 +58,11 @@ public class ConversationController {
      * @return
      */
     @GetMapping("/unique/{id}")
-    public List<Conversation> getAllByMusicienIdGroupByMusicien2(@PathVariable Long id, @RequestParam Long id2){
+    public List<ConversationDetailDto> getAllByMusicienIdGroupByMusicien2(@PathVariable Long id, @RequestParam Long id2){
         return conversationService.getAllConversByid1AndId2(id, id2);
+
     }
+
 
     /**
      * Met à jour une conversation

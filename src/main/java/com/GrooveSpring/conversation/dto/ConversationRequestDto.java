@@ -17,4 +17,5 @@ public class ConversationRequestDto {
     private String message;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
+    private String photo;
 }

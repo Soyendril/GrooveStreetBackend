@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Controller
 @CrossOrigin(origins = {"http://localhost:4200","http://localhost:4201", "http://localhost:4202", "http://localhost:4203"})
+
 public class ConversationWebSocketController {
     private final ConversationService conversationService;
     private SimpMessagingTemplate messagingTemplate;
