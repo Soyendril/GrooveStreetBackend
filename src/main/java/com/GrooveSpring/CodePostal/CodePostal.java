@@ -18,45 +18,34 @@ public class CodePostal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "datasetid")
-    private String datasetid;
+    @Column(name = "commune")
+    private String commune;
 
-    @Column(name = "recordid")
-    private String recordid;
+    @Column(name = "zipcode")
+    private String zipcode;
 
-    @Column(name = "code_postal")
-    private String code_postal;
-
-    @Column(name = "libelle_d_acheminement")
-    private String libelle_d_acheminement;
-
-    @Column(name = "code_commune_insee")
-    private String code_commune_insee;
-
-    @Column(name = "coordonnees_geographiques")
-    private double[] coordonnees_geographiques;
-
-    @Column(name = "nom_de_la_commune")
-    private String nom_de_la_commune;
-
-    @Column(name = "type")
-    private String type;
-
-    @Column(name = "coordinates")
-    private double[] coordinates;
-
-    @Column(name = "record_timestamp")
-    private String record_timestamp;
-
-    @OneToMany
+    @OneToMany(mappedBy = "codePostal")
     private List<Musicien> musiciens;
 
+    /**
+     * getDepartement() méthode qui permet de recuperer le departement en fonction du zipcode
+     * @return
+     */
     public String getDepartement() {
-        if (code_postal != null && code_postal.length() >= 2) {
-            return code_postal.substring(0, 2);
-        } else {
-            return null;
+        if (zipcode != null) {// vérification que le codepostal ne soit pas null
+            if (zipcode.length() == 4) {
+                zipcode= "0" + zipcode;
+                // verification de la taille du codePostal
+                // prise en compte du fait que les 10 premiers commencent par un 0
+                // ajout d'un 0 au debut du code postal
+            }
+            if (zipcode.length() >= 2) {
+                return zipcode.substring(0, 2);
+            }
+            // récuperation des deux premiers caractères du codepostal afin de dégager le departement
         }
-    }
+        return null;
+        }
+
 
 }
