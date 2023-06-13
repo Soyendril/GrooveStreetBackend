@@ -62,7 +62,7 @@ public interface ConversationRepository extends JpaRepository<Conversation, Long
      * @param musicien2Id
      * @return
      */
-    @Query("SELECT c.musicien1.id, c.musicien2.id, c.message, c.date, c.musicien1.photo FROM Conversation c WHERE (c.musicien1.id = :musicien1Id OR c.musicien2.id = :musicien1Id) AND (c.musicien1.id = :musicien2Id OR c.musicien2.id = :musicien2Id) ORDER BY c.date")
+    @Query("SELECT c.id, c.musicien1.id, c.musicien2.id, c.message, c.date, c.musicien1.photo FROM Conversation c WHERE (c.musicien1.id = :musicien1Id OR c.musicien2.id = :musicien1Id) AND (c.musicien1.id = :musicien2Id OR c.musicien2.id = :musicien2Id) ORDER BY c.date")
     List<Object[]> findByUser1IdAndUser2Id(Long musicien1Id, Long musicien2Id);
 
 
