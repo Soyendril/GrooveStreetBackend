@@ -195,15 +195,13 @@ public class ConversationService {
 
     /**
      * cree une conversation en utilisant des utilisateurs existants
-     * utilise par le controlleurSocket pour creer un message
+     * utilise par le controlleurSocket pour creer un message instantannée
      * @param conversationRequestDto modele minimum reçu du back : message + les id
      * @return
      */
     public Conversation createConversationWithMusiciens(ConversationRequestDto conversationRequestDto) {
         Long user1_id = conversationRequestDto.getMusicien1_id();
         Long user2_id = conversationRequestDto.getMusicien2_id();
-        String laDate = Instant.now() +"";
-        // conversationEntity.setDate(this.laDate);
 
         // Vérifie si les utilisateurs avec les IDs spécifiés existent
         Musicien musicien1 = musicienRepository.findById(user1_id).orElse(null);
@@ -218,6 +216,7 @@ public class ConversationService {
             conversation.setDate(conversationRequestDto.getDate());
             conversation.setMusicien1(musicien1);
             conversation.setMusicien2(musicien2);
+
             return conversationRepository.save(conversation);
         } else {
             throw new IllegalArgumentException("L'un ou les deux utilisateurs n'existent pas.");
