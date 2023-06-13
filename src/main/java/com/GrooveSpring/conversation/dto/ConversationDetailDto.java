@@ -6,6 +6,7 @@ import lombok.Data;
 import java.util.Date;
 @Data
 public class ConversationDetailDto {
+    private long id;
     private Long musicien1_id;
     private Long musicien2_id;
     private String message;

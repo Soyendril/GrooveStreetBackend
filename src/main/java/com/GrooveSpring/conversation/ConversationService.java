@@ -169,11 +169,12 @@ public class ConversationService {
 
         for (Object[] conversation : conversationData) {
             ConversationDetailDto dto = new ConversationDetailDto();
-            dto.setMusicien1_id((Long) conversation[0]);
-            dto.setMusicien2_id((Long) conversation[1]);
-            dto.setMessage((String) conversation[2]);
-            dto.setDate((Date) conversation[3]);
-            dto.setPhoto((String) conversation[4]);
+            dto.setId((Long) conversation[0]);
+            dto.setMusicien1_id((Long) conversation[1]);
+            dto.setMusicien2_id((Long) conversation[2]);
+            dto.setMessage((String) conversation[3]);
+            dto.setDate((Date) conversation[4]);
+            dto.setPhoto((String) conversation[5]);
             dtos.add(dto);
         }
         return dtos;
