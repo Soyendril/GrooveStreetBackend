@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "musiciens")
 public class Musicien {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String nom;
@@ -56,7 +56,7 @@ public class Musicien {
     @JsonBackReference
     private List<Musicien> profilsSuivi;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "code_postal_id")
     private CodePostal codePostal;
     public Musicien() {
