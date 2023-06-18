@@ -1,6 +1,7 @@
 package com.GrooveSpring.CodePostal;
 
 import com.GrooveSpring.Musicien.Musicien;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class CodePostal {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,6 +27,7 @@ public class CodePostal {
     private String zipcode;
 
     @OneToMany(mappedBy = "codePostal")
+    @JsonBackReference
     private List<Musicien> musiciens;
 
     /**

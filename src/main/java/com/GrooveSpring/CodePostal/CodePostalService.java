@@ -1,5 +1,6 @@
 package com.GrooveSpring.CodePostal;
 
+import com.GrooveSpring.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,8 @@ public class CodePostalService {
         return codePostalRepository.findAll();
     }
 
-    public Optional<CodePostal> getCodePostalById(Long id) {
-        return codePostalRepository.findById(id);
+    public CodePostal getCodePostalById(Long id) {
+        return codePostalRepository.findById(id).orElseThrow(() -> new NotFoundException("C'est d'la merde"+ id));
     }
 
     public CodePostal createCodePostal(CodePostal codePostal) {
