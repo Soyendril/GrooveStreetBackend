@@ -83,4 +83,9 @@ public class ConversationController {
     public void delete(@PathVariable Long id) {
         conversationService.deleteConversation(id);
     }
+
+    @DeleteMapping("")
+    public void deleteAll() {
+        conversationService.deleteAllConversation();
+    }
 }
