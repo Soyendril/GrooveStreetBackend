@@ -249,4 +249,10 @@ public class ConversationService {
         conversationRepository.deleteById(id);
     }
 
+
+
+    public void deleteAllConversation(){
+        conversationRepository.deleteAll();
+    }
+
 }
